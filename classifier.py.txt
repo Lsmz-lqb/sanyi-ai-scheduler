@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+"""算力分级模块：轻 / 中 / 重"""
+class TaskClassifier:
+    LIGHT = "light"
+    MEDIUM = "medium"
+    HEAVY = "heavy"
+
+    def classify(self, query: str, tags: list) -> str:
+        sensitive_tags = ["占卜", "卦", "经方", "辨证", "健康"]
+        if any(t in tags for t in sensitive_tags):
+            return self.HEAVY
+        if len(query) > 300:
+            return self.MEDIUM
+        return self.LIGHT

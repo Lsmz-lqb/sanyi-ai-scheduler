@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: MIT
+"""画面存档模块，本地存储，不上传"""
+import json
+import os
+from pathlib import Path
+
+ARCHIVE_DIR = Path("./local_archive")
+
+class Archive:
+    def __init__(self):
+        ARCHIVE_DIR.mkdir(exist_ok=True)
+
+    def save(self, uid: str, data: dict):
+        fp = ARCHIVE_DIR / f"{uid}.json"
+        with open(fp, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+
+    def load(self, uid: str):
+        fp = ARCHIVE_DIR / f"{uid}.json"
+        if not fp.exists():
+            return None
+        with open(fp, "r", encoding="utf-8") as f:
+            return json.load(f)

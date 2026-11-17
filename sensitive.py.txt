@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: MIT
+"""敏感模块门禁：医疗、占卜默认休眠，主动触发+强制免责"""
+from __init__ import SENSITIVE_PROVENANCE
+
+SENSITIVE_KEYWORDS = {"占卜", "卜卦", "卦象", "六爻", "经方", "辨证", "身体不舒服", "治病"}
+DISCLAIMER = """
+【强制免责声明，不可关闭】
+本内容仅为本体系思路参考，不属于医疗诊断、法律意见、投资决断。
+健康问题请找持证执业医师；重大事项请多方线下复核。
+"""
+
+class SensitiveGate:
+    def __init__(self):
+        self.active = False
+        self.provenance = SENSITIVE_PROVENANCE
+
+    def check(self, query: str):
+        hit = any(k in query for k in SENSITIVE_KEYWORDS)
+        if not hit:
+            return {"need_confirm": False, "active": False}
+        return {"need_confirm": True, "active": False, "msg": DISCLAIMER}
+
+    def confirm_activate(self):
+        self.active = True

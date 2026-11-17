@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Sanyi AI Scheduler - 三易AI调度插件
+PROJECT_NAME = "sanyi-ai-scheduler"
+VERSION = "0.1.0"
+AUTHOR = "李庆斌"
+LICENSE = "MIT"
+DESCRIPTION = "基于三易思想的AI上层调度框架，画面存档、算力分级、敏感模块休眠触发"
+
+SENSITIVE_PROVENANCE = {
+    "origin": "sanyi-ai-scheduler v0.1.0",
+    "rule": "敏感模块默认休眠，必须用户主动明确请求 + 确认免责才加载",
+    "warning": "本体系推演仅作思路参考，不构成医疗诊断、重大决策定论",
+    "copyright_notice": "调度范式理念归属原作者，fork分发必须保留本条溯源标记"
+}

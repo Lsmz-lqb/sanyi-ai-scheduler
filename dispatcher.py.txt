@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: MIT
+"""调度主控制器"""
+from kernel import SanyiKernel
+from classifier import TaskClassifier
+from archive import Archive
+from habits import HabitTracker
+from sensitive import SensitiveGate
+from policy import Policy
+
+class Dispatcher:
+    def __init__(self):
+        self.kernel = SanyiKernel()
+        self.classifier = TaskClassifier()
+        self.archive = Archive()
+        self.habits = HabitTracker()
+        self.gate = SensitiveGate()
+        self.policy = Policy(self.gate)
+
+    def handle(self, query: str):
+        gate_res = self.gate.check(query)
+        if gate_res["need_confirm"]:
+            return gate_res
+
+        level = self.classifier.classify(query, [])
+        self.habits.record_tag("general", level)
+        decomposed = self.kernel.decompose(query)
+        return {
+            "level": level,
+            "decompose": decomposed,
+            "policy": self.policy.run_policy(decomposed)
+        }

@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: MIT
+"""推演策略库，敏感模块激活后才加载策略"""
+class Policy:
+    def __init__(self, gate: SensitiveGate):
+        self.gate = gate
+
+    def run_policy(self, context: dict):
+        if not self.gate.active:
+            return {"status": "sleep", "tip": "敏感模块未激活"}
+        return {"status": "running", "result": "推演执行中"}

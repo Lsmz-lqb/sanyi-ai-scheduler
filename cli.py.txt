@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: MIT
+"""命令行入口，本地测试使用"""
+from dispatcher import Dispatcher
+
+def main():
+    d = Dispatcher()
+    print("==== Sanyi AI Scheduler v0.1.0 ====")
+    print("输入问题，exit退出\n")
+    while True:
+        q = input("> ")
+        if q.strip().lower() == "exit":
+            break
+        res = d.handle(q)
+        print(res)
+
+if __name__ == "__main__":
+    main()

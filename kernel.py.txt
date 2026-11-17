@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: MIT
+"""
+三易内核：顶层思考规则
+原则：观象、简化、知止；机会/重大问题才深化
+"""
+from typing import Dict, Any
+
+class SanyiKernel:
+    def __init__(self):
+        self.principle = "易简，变易，不易"
+
+    def decompose(self, user_query: str) -> Dict[str, Any]:
+        """把复杂问题拆解、简化，建立画面"""
+        return {
+            "raw": user_query,
+            "core": None,
+            "view": "pending",
+            "status": "decomposing"
+        }
+
+    def judge_stop(self, context: Dict[str, Any]) -> bool:
+        """知止判断：达到边界就不再无限推演"""
+        # 预留：后续重大问题再深化规则
+        return False
